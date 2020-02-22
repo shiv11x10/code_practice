@@ -1,0 +1,49 @@
+---------------------------------------------------------------------------------------------------------------------------
+Mr. Pr and Ms. Ad are at a and b respectively on an infinite number line. Mr. Pr wants to meet Ms. Ad.
+
+Mr. Pr can choose to move c or d units in 1 second. If Mr. Pr moves c units then Ms. Ad will move d units and vice versa. 
+(Both of them always moved in positive x-direction)
+
+You have to determine if Mr. Pr can meet with Ms. Ad after some integral amount of time, given that Mr. Pr chooses optimally. 
+Note that meeting after a fractional amount of time does not count.
+---------------------------------------------------------------------------------------------------------------------------------
+
+#include<bits/stdc++.h>
+#include<algorithm>
+using namespace std;
+
+//#define ll long long
+
+int main()
+{
+    ios_base :: sync_with_stdio(false);
+    cin.tie(NULL);
+    
+   int t;
+   cin>>t;
+   int a,b,c,d;
+   while(t--) {
+   	
+   	cin>>a>>b>>c>>d;
+   	
+   	int diff = abs(a-b);
+   	int diff2 = abs(c-d);
+   	
+   	if(diff==0){
+	   cout<<"YES\n";
+   		continue;
+	   }
+	if(diff2==0){
+	   cout<<"NO\n";
+   		continue;
+	   }   
+	
+	if(diff%diff2==0){
+		cout<<"YES\n";
+	}
+	else
+		cout<<"NO\n";
+	}
+   
+    return 0;
+}
