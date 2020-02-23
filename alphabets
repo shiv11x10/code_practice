@@ -1,0 +1,57 @@
+#programs to find number of alphabets in a string.
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+   char string[100];
+   int c = 0, count[26] = {0}, x;
+
+   printf("Enter a string\n");
+   gets(string);
+
+   while (string[c] != '\0') {
+   /** Considering characters from 'a' to 'z' only and ignoring others. */
+
+      if (string[c] >= 'a' && string[c] <= 'z') {
+         x = string[c] - 'a';
+         count[x]++;
+      }
+
+      c++;
+   }
+
+   for (c = 0; c < 26; c++)
+         printf("%c occurs %d times in the string.\n", c + 'a', count[c]);
+
+   return 0;
+}
+
+Question based on this:
+-------------------------------------------------------------------------------------------------------------------------
+Given two strings, a and b , that may or may not be of the same length, 
+determine the minimum number of character deletions required to make a and b anagrams. 
+Any characters can be deleted from either of the strings.
+
+Input :
+test cases,t
+two strings a and b, for each test case
+-------------------------------------------------------------------------------------------------------------------------
+#include<iostream>
+using namespace std;
+int main(){
+    int t;cin>>t;
+    while(t--){
+        string a,b;
+        int str_a[26]={0},str_b[26]={0};
+    cin>>a>>b;
+    for(int i=0;a[i]!='\0';i++)
+       str_a[a[i]-'a']++;
+    for(int i=0;b[i]!='\0';i++)
+       str_b[b[i]-'a']++;
+       int res=0;
+    for(int i=0;i<26;i++)
+     res+=abs(str_b[i]-str_a[i]);
+ cout<<res<<'\n';}
+ return 0;
+    
+}
