@@ -1,0 +1,45 @@
+--------------------------------------------------------------------------------------------------------------------------------
+ome problems appear hard though they are very easy. Today Aakash is stuck in a range query problem. 
+He has been given an array with only numbers 0 and 1. There are two types of queries -
+
+0 L R : Check whether the number formed from the array elements L to R is even or odd and print EVEN or ODD respectively. 
+Number formation is the binary number from the bits status in the array L to R
+
+1 X : Flip the Xth bit in the array
+
+Indexing is 1 based
+-------------------------------------------------------------------------------------------------------------------------------
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int n,q;
+    cin>>n>>q;
+    int a[n];
+    for(int i = 0; i<n;i++){
+        cin>>a[i];
+    }
+    int t;
+    int b,c;
+    while(q--){
+        cin>>t;
+        switch(t){
+            case 1:
+                cin>>b;
+                if(a[b-1]==0)
+                    a[b-1] = 1;
+                else
+                    a[b-1] = 0;
+                break;
+            case 0:
+                cin>>b>>c;
+                if(a[c-1] == 0)
+                	cout<<"EVEN";
+                else
+                	cout<<"ODD";
+        }
+    }
+    return 0;
+}
