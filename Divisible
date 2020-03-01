@@ -1,0 +1,68 @@
+---------------------------------------------------------------------------------------------------------------------------------
+You are given an array A of size N that contains integers. Here,  is an even number. You are required to perform the following operations:
+
+Divide the array of numbers in two equal halves
+Note: Here, two equal parts of a test case are created by dividing the array into two equal parts.
+Take the first digit of the numbers that are available in the first half of the array (first 50% of the test case)
+Take the last digit of the numbers that are available in the second half of the array (second 50% of the test case)
+Generate a number by using the digits that have been selected in the above steps
+Your task is to determine whether the newly-generated number is divisible by 11.
+
+Input format
+First line: A single integer N denoting the size of array A 
+Second line: N space-separated integers denoting the elements of array A 
+Output format
+If the newly-generated number is divisible by 11, then print OUI . Otherwise, print NON .
+-----------------------------------------------------------------------------------------------------------------------------------
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int length(int num){
+    int c = 0;
+    while(num){
+        c++;
+        num = num/10;
+    }
+    return c;
+}
+
+string solve (vector<int> A, int n) {
+    long t,a[n],k;
+   for(auto i=0;i<n/2;i++){
+       k = length(A[i]);
+       t = int(pow(10,k-1));
+       a[i] = A[i]/t;
+   }
+   for(auto i=n/2;i<n;i++){
+       a[i] = A[i]%10;
+   }
+   long sum = 0,x=1;
+   for(auto i=0 ; i<n ; i++)
+    {
+    	sum=sum+x*a[i];
+    	x=x*(-1);
+    }
+   if(sum%11==0){
+       return "OUI";
+   }
+   else
+    return "NON";
+}
+
+int main() {
+
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    int N;
+    cin >> N;
+    vector<int> A(N);
+    for(int i_A=0; i_A<N; i_A++)
+    {
+    	cin >> A[i_A];
+    }
+
+    string out_;
+    out_ = solve(A, N);
+    cout << out_;
+}
