@@ -1,0 +1,88 @@
+-----------------------------------------------------------------------------------------------------------------------------
+You are given an array of integers. The special property of the array is that exactly two different elements
+occur once while other elements occur twice.
+You are required to determine those two elements.
+
+Input format
+First line: Integer  denoting the number of elements in the array
+Second line:  space-separated integers denoting the values in the array
+
+Output format
+Print two space-separated integers that occur once in the array in ascending order.
+----------------------------------------------------------------------------------------------------------------------------
+This can have two types of solutions:
+1. With a XOR method explained on geekforgeeks
+
+#include <bits/stdc++.h> 
+using namespace std; 
+  
+
+void get2NonRepeatingNos(int arr[], int n, int *x, int *y)  
+{  
+    int Xor = arr[0]; 
+    int set_bit_no; 
+    int i;  
+    *x = 0;  
+    *y = 0;  
+      
+    
+    for(i = 1; i < n; i++)  
+    Xor ^= arr[i];  
+      
+   
+    set_bit_no = Xor & ~(Xor-1);  
+      
+  
+    for(i = 0; i < n; i++)  
+    {  
+        if(arr[i] & set_bit_no)  
+        *x = *x ^ arr[i]; 
+        else
+        *y = *y ^ arr[i];
+    }  
+}  
+  
+
+int main()  
+{  
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+    int n;
+	cin>>n;
+	int arr[n];
+	for(int i=0;i<n;i++){
+		cin>>arr[i];
+	}
+    int *x = new int[(sizeof(int))];  
+    int *y = new int[(sizeof(int))];  
+    get2NonRepeatingNos(arr, n, x, y);  
+    cout<<min(*x,*y)<<" "<<max(*y,*x);  
+}  
+-----------------------------------------------------------------
+
+2. One more smart way is to make an array of maximum size
+
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int n;
+	cin>>n;
+	int a[n],i,b[1000000]={0},c[2],d=0;
+	for(i=0;i<n;i++)
+	{
+	cin>>a[i];
+	b[a[i]]++;
+	}
+	for(i=0;i<1000000;i++)
+	{
+		if(b[i]==1)
+		{
+         c[d]=i;
+		 d++;
+		}
+	}
+	sort(c,c+d);
+	cout<<c[0]<<" "<<c[1];
+	return 0;
+}
