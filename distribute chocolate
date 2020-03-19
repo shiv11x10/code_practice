@@ -1,0 +1,103 @@
+-------------------------------------------------------------------------------------------------------------------------------
+You have c number of chocolates that you want to distribute between your n students. 
+The intelligence level of the students is not the same, therefore, you decide to distribute the chocolates in such a way 
+that a smarter student gets strictly more chocolates than the ones who are less smarter.
+
+The difference between the chocolates received by any two adjacent students must be exactly one. 
+Formally, if the least intelligent student gets k chocolates, then others must get k+1,k+2.... At the same time, 
+your task is to minimize the number of chocolates that are left (if any) after distributing those among students. 
+Determine the minimum number of chocolates left.
+
+Note
+It is mandatory to give chocolates to everyone if it is possible to do so. In other words, it is not possible 
+that some students are getting chocolates and others are not.
+
+Input format
+First line: T denoting the number of test cases T  
+For each test case (next T lines):
+First line: Two space-separated integers c and n
+Output format 
+For each test case, print the minimum number of chocolates left in a new line.
+-----------------------------------------------------------------------------------------------------------------------------
+
+Method 1: Naive approach
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define ll long long
+#define fast() ios_base::sync_with_stdio(false);cin.tie(NULL);
+#define fo(i,n) for(int i=0;i<n;i++)
+
+// void sum(ll arr[],ll n,ll b,ll c){
+// 	ll s = 0;
+// 	for(int i=b; i<=c;i++){
+// 		s+=arr[i];
+// 	}
+// 	cout<<s<<"\n";
+// } 
+
+int main() {
+    fast()
+    int t;
+	cin>>t;
+	ll c,n;
+	while(t--){
+		cin>>c>>n;
+		ll val = ((n+2*0+1)*n)/2;
+		if(val==c){
+			cout<<0<<"\n";
+			continue;
+		}else if(val>c){
+			cout<<c<<"\n";
+			continue;
+		}
+		ll temp = c-val;
+		ll i=1; 
+		while(1){
+			val = ((n+2*i+1)*n)/2;
+			if(val>c)
+				break;
+			if((c-val)<temp)
+				temp = c-val;
+			i++;
+		}
+		cout<<temp<<"\n";
+	}
+}
+**************
+This brute force approach will get time limit exceeded.
+**************
+
+method 2: SMart approach
+#include <stdio.h>
+int main()
+{
+  long long int t,choco,stud;
+  scanf("%lld",&t);
+  for(int u=0;u<t;u++){
+    scanf("%lld %lld",&choco,&stud);
+    long long int sum = (stud)*(stud+1)/2;
+    if(sum>choco){
+      printf("%lld\n",choco);
+    }
+    else
+    {
+    choco = choco-sum;
+    choco = choco%stud;
+    printf("%lld\n",choco);
+    }
+  }
+  return 0;
+}
+**********************
+This is based on that mathmatical fact that after we do sum of first n terms next sums will just add a constant number
+for example:
+20 3
+sum of first 3 terms - 1 + 2 + 3 = 6
+then sum of next 3 terms 2 + 3 + 4 (we add 4 and minus 1 so adding 3)
+next consecutive times will be 3 also
+That's why we can modulus
+**********************
+
+
+
