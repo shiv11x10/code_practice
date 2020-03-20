@@ -1,0 +1,37 @@
+-----------------------------------------------------------------------------------------------------------------------------
+A string s is called a good string if and only if two consecutive letters are not the same. 
+For example, abcab and cda  are good while abaa and accba are not.
+
+You are given a string s. Among all the good substrings of s ,print the size of the longest one.
+------------------------------------------------------------------------------------------------------------------------------
+
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define ll long long
+#define fast() ios_base::sync_with_stdio(false);cin.tie(NULL);
+#define fo(i,n) for(int i=1;i<(n);i++)
+
+int main() {
+    fast()
+    string str;
+	cin>>str;
+	int c = 1;
+	vector<int> v;
+	int n = str.size();
+	fo(i,n){
+		
+			if(str[i]==str[i-1]){
+				v.push_back(c);
+				c=0;
+			}
+			c++;
+			if(i==n-1)
+				v.push_back(c);
+		
+	}
+	if(c==n)
+		cout<<c;
+	else
+		cout<<*max_element(v.begin(), v.end());	
+}
