@@ -1,0 +1,113 @@
+--------------------------------------------------------------------------------------------------------------------------
+In this challenge, you will be given a string. You must remove characters until the string is made up of any two 
+alternating characters. When you choose a character to remove, all instances of that character must be removed. 
+Your goal is to create the longest string possible that contains just two alternating letters.
+
+As an example, consider the string abaacdabd. If you delete the character a, you will be left with the string bcdbd. 
+Now, removing the character c leaves you with a valid string bdbd having a length of 4. Removing either b or d at any 
+point would not result in a valid string.
+
+Given a string s, convert it to the longest possible string t made up only of alternating characters. 
+Print the length of string t on a new line. If no string t can be formed, print0  instead.
+---------------------------------------------------------------------------------------------------------------------------
+
+Approach 1:
+
+#include <bits/stdc++.h>
+using namespace std;
+
+bool solve(int p1, int p2, string s){
+    char c1 = 97 + p1;
+    char c2 = 97 + p2;
+    char k = '#';
+    for(int i=0;i<s.length();i++){
+        if((s[i]==c1||s[i]==c2)){
+            if(k=='#')
+                k = s[i];
+            else{
+            if(s[i]==k)
+                return false;
+            else
+                k = s[i];
+            }
+        }
+    }
+
+return true;
+}
+
+int alternate(string s) {
+int p[26]={0}, max=0;
+for(int i=0;i<s.length();i++)
+    p[s[i]-'a']++;
+    
+for(int i=0;i<26;i++){
+    for(int j=i+1;j<26;j++){
+        if((p[i]>0)&&(p[j]>0)){
+            if(abs(p[i]-p[j])==0||abs(p[i]-p[j])==1){
+                if(solve(i, j, s)){
+                    if((p[i]+p[j])>max)
+                         max = p[i] + p[j];
+                }
+            }
+        }
+    }
+}
+if(max==0){
+    return 0;
+}
+return max;
+}
+
+int main()
+{
+    int n;
+    cin>>n;
+    string s;
+    cin>>s;
+
+    int result = alternate(s);
+
+    cout << result << "\n";
+
+    return 0;
+}
+
+
+Approach 2:
+
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+typedef unsigned long long ull;
+typedef pair<int, int> ii;
+
+int valid(string x) {
+    const int n = x.size();
+    for (int i = 1; i < n; ++i)
+        if (x[i] == x[i-1])
+            return false;
+    return true;
+}
+
+int main() {
+    int asd;
+    cin>>asd;
+    string s;
+    cin>>s;
+    int ans = 0;
+    for (char a = 'a'; a <= 'z'; ++a)
+    for (char b = 'a'; b <= 'z'; ++b)
+    if (a != b)
+    {
+        if (s.find(a) == string::npos) continue;
+        if (s.find(b) == string::npos) continue;
+        string x;
+        for (const char ch : s)
+            if (ch == a || ch == b)
+                x.push_back(ch);
+        if (valid(x))
+            ans = max(ans, (int)x.size());
+    }
+    printf("%d\n", ans);
+}
