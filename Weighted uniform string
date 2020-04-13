@@ -1,0 +1,74 @@
+--------------------------------------------------------------------------------------------------------------
+Program to find if a query belongs to weighted uniform subsequence or not?
+where weighted means value of alphabet
+a=1 b=2 c=3 ........ z=26
+
+for eg: aaabbbbcccc
+uniform subseqences are a aa aaa b bb bbb bbbb c cc ccc cccc
+so 1 1+1 1+1+1 1+1+1+1 .............. 3+3+3+3
+are accepted values
+
+Input Format
+The first line contains a string.
+The second line contains an integer, the number of queries.
+Each of the next lines contains an integer, the weight of a uniform subtring that may or may not exist.
+
+Output Fprmat
+Print "Yes" or "No"
+-----------------------------------------------------------------------------------------------------------------
+
+#include <bits/stdc++.h>
+
+using namespace std;
+#define ll long long
+// Complete the weightedUniformStrings function below.
+#define MAX 10000001
+int solve[MAX] = {0};
+void weightedUniformStrings(string s) {
+for(int i=0;i<s.size();i++){
+    int num=(s[i]-'a')+1;
+    int c=1;
+//    v.insert(sum);
+//    i++;
+//    while(s[i]==s[i-1]){
+//        sum = sum + ((s[i]-'a')+1);
+//        v.insert(sum);
+//        i++;
+//    }
+    while(s[i]==s[i+1]){
+        c++;
+        i++;
+    }
+    for(int k=1;k<=c;k++){
+        solve[num*k]=1;
+    }
+    
+}
+
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    string s;
+    getline(cin, s);
+
+    weightedUniformStrings(s);
+
+    ll queries_count;
+    cin >> queries_count;
+    
+    while(queries_count--){
+    
+    ll queries;
+    cin>>queries;
+    
+    if(solve[queries]){
+        cout<<"Yes"<<"\n";
+    }
+    else
+        cout<<"No"<<"\n";
+
+}
+}
